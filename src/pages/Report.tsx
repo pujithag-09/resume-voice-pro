@@ -18,10 +18,12 @@ const Report = () => {
   };
 
   const stats = {
-    questionsAnswered: answers.length || 3,
+    questionsAnswered: answers.length || 5,
     averageTime: answers.length > 0 
-      ? Math.round(answers.reduce((acc: number, a: any) => acc + a.duration, 0) / answers.length)
+      ? Math.round(answers.reduce((acc: number, a: any) => acc + (a.duration || 0), 0) / answers.length)
       : 120,
+    voiceAnswers: answers.filter((a: any) => a.mode === "voice").length,
+    textAnswers: answers.filter((a: any) => a.mode === "text").length,
   };
 
   const strengths = [
@@ -72,16 +74,18 @@ const Report = () => {
           </div>
 
           {/* Statistics */}
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-3 gap-4">
             <div className="p-6 rounded-xl bg-card/50 backdrop-blur-sm border border-border animate-scale-in">
               <p className="text-muted-foreground mb-2">Questions Answered</p>
               <p className="text-3xl font-bold">{stats.questionsAnswered}</p>
             </div>
             <div className="p-6 rounded-xl bg-card/50 backdrop-blur-sm border border-border animate-scale-in">
-              <p className="text-muted-foreground mb-2">Average Response Time</p>
-              <p className="text-3xl font-bold">
-                {Math.floor(stats.averageTime / 60)}:{(stats.averageTime % 60).toString().padStart(2, "0")}
-              </p>
+              <p className="text-muted-foreground mb-2">Voice Answers</p>
+              <p className="text-3xl font-bold">{stats.voiceAnswers}</p>
+            </div>
+            <div className="p-6 rounded-xl bg-card/50 backdrop-blur-sm border border-border animate-scale-in">
+              <p className="text-muted-foreground mb-2">Text Answers</p>
+              <p className="text-3xl font-bold">{stats.textAnswers}</p>
             </div>
           </div>
 
