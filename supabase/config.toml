@@ -1,0 +1,14 @@
+[functions.setup-database]
+verify_jwt = false
+
+[functions.parse-resume]
+verify_jwt = false
+
+[functions.generate-questions]
+verify_jwt = false
+
+[functions.submit-answer]
+verify_jwt = false
+
+[functions.generate-report]
+verify_jwt = false
